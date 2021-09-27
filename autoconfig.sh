@@ -38,14 +38,13 @@ fi
 
 
 # Führe das Skript aus
-
-#php fb_tools/fb_tools.php $FBPASS@192.168.178.1 konfig export
-#echo
+php fb_tools/fb_tools.php $FBPASS@192.168.178.1 konfig export-decrypt
+echo
 
 #Suche die aktuelle .export-Datei um diese zu bearbeiten.
 #Hinweis: Es ist wohl nicht best practice, mit "ls"-Output zu arbeiten. Wir sollten das auf "find" ändern.
 
-FILENAME=$(ls -t fb_tools/|grep 'FRITZ.Box'|head -n 1)
+FILENAME=$(ls -t|grep 'FRITZ.Box'|head -n 1)
 
 echo $FILENAME
 echo $FILENAME
@@ -56,7 +55,7 @@ echo $FILENAME
 sed -E -i '/^[^\n]*targets/{:a;N;/passwd/!ba
         s/^([^\n]*\n){1,10}[^\n]*$/&/;Tb
         s/(username = ).*/\1"'$PPPOE'";/m
-        s/(passwd = ).*/\1"'$PPPOEPASS'";/m};:b;P;D' fb_tools/"${FILENAME}"
+        s/(passwd = ).*/\1"'$PPPOEPASS'";/m};:b;P;D' "${FILENAME}"
 
 exit 0
 
